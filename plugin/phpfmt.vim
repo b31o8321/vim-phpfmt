@@ -22,7 +22,7 @@ if exists('g:phpfmt_config')
 endif
 
 fun! PhpFmtFix(path)
-    let command = g:phpfmt_command.' '.a:path
+    let command = g:phpfmt_command
 
     if exists('g:phpfmt_passes_list')
         let command = command.' --passes='.g:phpfmt_passes_list
@@ -40,7 +40,7 @@ fun! PhpFmtFix(path)
         let command = command.' --psr2'
     endif
 
-
+    let command = command . ' ' . a:path
     let s:lint = system(g:phpfmt_php_path.' -l '.a:path)
     if v:shell_error
         echohl Error | echo s:lint | echohl None
@@ -51,7 +51,7 @@ fun! PhpFmtFix(path)
         else
             exec 'edit!'
             :set statusline="phpfmt: done"
-	    :set syntax=php
+            :set syntax=php
         endif
     endif
 
