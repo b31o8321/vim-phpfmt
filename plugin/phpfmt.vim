@@ -32,6 +32,10 @@ fun! PhpFmtFix(path)
         let command = command.' --prepasses='.g:phpfmt_prepasses_list
     endif
 
+    if exists('g:phpfmt_psr')
+        let command = command.' --psr'
+    endif
+
     if exists('g:phpfmt_psr1')
         let command = command.' --psr1'
     endif
